@@ -1,0 +1,32 @@
+// Return the next permuation
+
+This is done in Three Steps :
+1. Search the index such that next_ele > curr_ele  
+2. Search the index such that first_ele > curr_ele
+3. Reverse after the first element
+
+class Solution {
+public:
+    void nextPermutation(vector<int>& nums) {
+        int n = nums.size();
+        if(n<=1){
+            return;
+        }
+        
+        // Search the index such that next_ele > curr_ele  
+        int i = n-2;
+        while(i>=0 && nums[i]>=nums[i+1]){
+            i--;
+        }
+        
+        if(i>=0){
+            // Search the index such that first_ele > curr_ele
+            int j=n-1;
+            while(nums[j]<=nums[i]){
+                j--;
+            }
+            swap(nums[i], nums[j]);
+        }
+        reverse(nums.begin()+i+1, nums.end());
+    }
+};
